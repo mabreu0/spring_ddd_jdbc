@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="xml" indent="yes"/>
+
+    <!-- Match all elements -->
+    <xsl:template match="*">
+        <!-- Convert element name to uppercase -->
+        <xsl:element name="{translate(name(), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')}">
+            <!-- Process child nodes recursively -->
+            <xsl:apply-templates/>
+        </xsl:element>
+    </xsl:template>
+
+    <!-- Copy text nodes as-is -->
+    <xsl:template match="text()">
+        <xsl:value-of select="."/>
+    </xsl:template>
+
+    <!-- Ignore other nodes -->
+    <xsl:template match="comment() | processing-instruction() | @*"/>
+
+    <!-- Match each specific XML tag -->
+    <xsl:template match="PrimerNombre">
+        <PRIMER_NOMBRE>
+            <xsl:apply-templates/>
+        </PRIMER_NOMBRE>
+    </xsl:template>
+
+    <xsl:template match="SegundoNombre">
+        <SEGUNDO_NOMBRE>
+            <xsl:apply-templates/>
+        </SEGUNDO_NOMBRE>
+    </xsl:template>
+
+    <xsl:template match="PrimerApellido">
+        <PRIMER_APELLIDO>
+            <xsl:apply-templates/>
+        </PRIMER_APELLIDO>
+    </xsl:template>
+
+    <xsl:template match="SegundoApellido">
+        <SEGUNDO_APELLIDO>
+            <xsl:apply-templates/>
+        </SEGUNDO_APELLIDO>
+    </xsl:template>
+
+    <xsl:template match="CedulaNueva">
+        <CEDULA_NUEVA>
+            <xsl:apply-templates/>
+        </CEDULA_NUEVA>
+    </xsl:template>
+
+    <xsl:template match="CedulaVieja">
+        <CEDULA_VIEJA>
+            <xsl:apply-templates/>
+        </CEDULA_VIEJA>
+    </xsl:template>
+
+    <xsl:template match="Sexo">
+        <SEXO>
+            <xsl:apply-templates/>
+        </SEXO>
+    </xsl:template>
+
+    <xsl:template match="Pasaporte">
+        <PASAPORTE>
+            <xsl:apply-templates/>
+        </PASAPORTE>
+    </xsl:template>
+
+    <xsl:template match="LugarNacimiento">
+        <LUGAR_NACIMIENTO>
+            <xsl:apply-templates/>
+        </LUGAR_NACIMIENTO>
+    </xsl:template>
+
+    <xsl:template match="FechaNacimiento">
+        <FECHA_NACIMIENTO>
+            <xsl:apply-templates/>
+        </FECHA_NACIMIENTO>
+    </xsl:template>
+
+    <xsl:template match="EstadoCivil">
+        <ESTADO_CIVIL>
+            <xsl:apply-templates/>
+        </ESTADO_CIVIL>
+    </xsl:template>
+
+    <xsl:template match="Edad">
+        <EDAD>
+            <xsl:apply-templates/>
+        </EDAD>
+    </xsl:template>
+
+    <xsl:template match="Ocupacion">
+        <OCUPACION>
+            <xsl:apply-templates/>
+        </OCUPACION>
+    </xsl:template>
+
+    <xsl:template match="Categoria">
+        <CATEGORIA>
+            <xsl:apply-templates/>
+        </CATEGORIA>
+    </xsl:template>
+
+    <xsl:template match="CedulaConyugue">
+        <CEDULA_CONYUGUE>
+            <xsl:apply-templates/>
+        </CEDULA_CONYUGUE>
+    </xsl:template>
+
+    <xsl:template match="Padre">
+        <PADRE>
+            <xsl:apply-templates/>
+        </PADRE>
+    </xsl:template>
+
+    <xsl:template match="Madre">
+        <MADRE>
+            <xsl:apply-templates/>
+        </MADRE>
+    </xsl:template>
+
+    <xsl:template match="FechaIndagacion">
+        <FECHA_INDAGACION>
+            <xsl:apply-templates/>
+        </FECHA_INDAGACION>
+    </xsl:template>
+
+    <xsl:template match="Suscriptor">
+        <SUSCRIPTOR>
+            <xsl:apply-templates/>
+        </SUSCRIPTOR>
+    </xsl:template>
+
+    <xsl:template match="Hora">
+        <HORA>
+            <xsl:apply-templates/>
+        </HORA>
+    </xsl:template>
+
+    <xsl:template match="Tipo">
+        <TIPO>
+            <xsl:apply-templates/>
+        </TIPO>
+    </xsl:template>
+
+    <xsl:template match="Dire">
+        <DIRE>
+            <xsl:apply-templates/>
+        </DIRE>
+    </xsl:template>
+
+    <xsl:template match="Tel">
+        <TEL>
+            <xsl:apply-templates/>
+        </TEL>
+    </xsl:template>
+
+    <xsl:template match="TipoTel">
+        <TIPOTEL>
+            <xsl:apply-templates/>
+        </TIPOTEL>
+    </xsl:template>
+
+    <!-- Template for ResumenTransaccione -->
+    <xsl:template match="ResumenTransacciones">
+        <RESUMEN_TRANSACCIONES>
+            <xsl:apply-templates/>
+        </RESUMEN_TRANSACCIONES>
+    </xsl:template>
+
+    <!-- Template for ResumenTrxs -->
+    <xsl:template match="ResumenTrxs">
+        <TRANSAC>
+            <xsl:apply-templates select="@*|node()"/>
+        </TRANSAC>
+    </xsl:template>
+
+    <!-- Template for attributes of ResumenTrxs -->
+    <xsl:template match="ResumenTrxs/@*">
+        <xsl:attribute name="{name()}">
+            <xsl:value-of select="."/>
+        </xsl:attribute>
+    </xsl:template>
+
+    <!-- Template for other elements -->
+    <xsl:template match="ResumenTransaccione//*">
+        <xsl:element name="{translate(name(), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')}">
+            <xsl:apply-templates select="@*|node()"/>
+        </xsl:element>
+    </xsl:template>
+
+    <!-- Template for Activas -->
+    <xsl:template match="Activas">
+        <ACTIVAS>
+            <xsl:apply-templates/>
+        </ACTIVAS>
+    </xsl:template>
+
+    <!-- Template for Inactivas -->
+    <xsl:template match="Inactivas">
+        <INACTIVAS>
+            <xsl:apply-templates/>
+        </INACTIVAS>
+    </xsl:template>
+
+    <!-- Template for Indagaciones -->
+    <xsl:template match="Indagaciones">
+        <INDAGACIONES>
+            <xsl:apply-templates/>
+        </INDAGACIONES>
+    </xsl:template>
+
+    <!-- Add templates for other XML tags as needed -->
+
+    <!-- Start with the root element -->
+    <xsl:template match="/">
+        <xsl:apply-templates/>
+    </xsl:template>
+</xsl:stylesheet>
